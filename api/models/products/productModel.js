@@ -62,7 +62,8 @@ exports.createProduct = (req, res) => {
         const newProduct = new Product({
             name: req.body.name,
             desc: req.body.desc,
-            price: req.body.price
+            price: req.body.price,
+            image: req.body.image
         })
 
         newProduct.save()

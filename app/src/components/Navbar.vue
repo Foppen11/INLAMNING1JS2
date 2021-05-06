@@ -4,7 +4,7 @@
     <!-- Container wrapper -->
         <div class="container-fluid">
             <!-- Navbar brand -->
-            <router-link class="navbar-brand ml-5" to="/">Logo</router-link>
+            <router-link class="navbar-brand ml-5" to="/"><i class="fas fa-gamepad">GamersOnline</i></router-link>
 
             <!-- Toggle button -->
             <button
@@ -21,31 +21,50 @@
 
             <!-- Collapsible wrapper -->
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <!-- Left links -->
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <!-- center links -->
+                <ul class="navbar-nav mb-2 mb-lg-0">
+                    
                     <li class="nav-item">
                         <router-link class="nav-link" aria-current="page" to="/products">Products</router-link>
                     </li>
-                </ul>
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    
                     <li class="nav-item">
                         <router-link class="nav-link" aria-current="page" to="/orders">Orders</router-link>
                     </li>                    
-                    <li class="nav-item">
-                        <router-link class="nav-link" to="/cart">
-                            <span class="badge badge-pill bg-danger">1</span>
-                            <span><i class="fas fa-shopping-cart"></i></span>
-                        </router-link>
-                    </li>
-                    <li class="nav-item mr-5">
-                        <router-link class="nav-link" aria-current="page" to="/account">My account</router-link>
-                    </li>
-                    
-                    <!-- Navbar dropdown -->
-        
                 </ul>
-            <!-- Left links -->
+                <!-- center links -->
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item drop-down">
+                        <a
+                        class="nav-link dropdown"
+                        href="#"
+                        id="navbarDropdownMenuLink"
+                        role="button"
+                        data-mdb-toggle="dropdown"
+                        aria-expanded="false"
+                        >
+                        <i class="fas fa-shopping-cart"></i>
+                        <span v-show="cartItemQuantity" class="badge rounded-pill badge-notification bg-danger"> {{cartItemQuantity}} </span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end shopping-cart" aria-labelledby="navbarDropdownMenuLink">
+                            <ShoppingCart />
+                        </ul>
+                    </li>
+                    <li class="nav-item drop-down">
+                        <a
+                        class="nav-link dropdown"
+                        href="#"
+                        id="navbarDropdownMenuLink"
+                        role="button"
+                        data-mdb-toggle="dropdown"
+                        aria-expanded="false"
+                        >
+                            <i class="fas fa-user"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+                            USER SETTINGS
+                        </ul>
+                </li>
+            </ul>
             </div>
         
         </div>
@@ -55,8 +74,16 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+import ShoppingCart from './shoppingCart/ShoppingCart'
 export default {
-
+    name: 'navbar',
+    components:{
+        ShoppingCart
+    },
+    computed:{
+        ...mapGetters(['cartItemQuantity'])
+    }
 }
 </script>
 
