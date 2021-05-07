@@ -24,19 +24,39 @@ export default{
     },
     mutations:{
         ADD_TO_CART: (state, {product, quantity}) => {
-            let exists = state.cart.find(item => item.product._id === product.id)
+            let exists = state.cart.find(item => item.product._id === product._id)
             if(exists){
-                exists.quantity += quantity
+                exists.quantity += 1
                 return
             }
             else{
                 state.cart.push({product, quantity})
             }
+        },
+        REDUCE_FROM_CART: (state, item) => {
+            let productQuantity = state.cart.find(i => i.product._id === item.product._id)
+            if(productQuantity.quantity > 1){
+                productQuantity.quantity -= 1
+                return
+            }
+            else{
+                state.cart.splice((state.cart.find(i => i.product._id === item.product._id)), 1)
+            }
+        },
+        DELETE_FROM_CART: (state, item) => {
+            state.cart.splice((state.cart.find(i => i.product._id === item.product._id)), 1)
+            return
         }
     },
     actions: {
         addProductToCart: ({commit}, { product, quantity }) => {
             commit('ADD_TO_CART', {product, quantity})
+        },
+        reduseItem: ({commit}, {product, quantity }) => {
+            commit('REDUCE_FROM_CART', {product, quantity})
+        },
+        deleteItem: ({commit}, product) => {
+            commit('DELETE_FROM_CART', product)
         }
     }
 }

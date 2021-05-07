@@ -1,6 +1,9 @@
 <template>
   <div>
-    Homepage
+    <h5 class="text-white">
+      Homepage
+
+    </h5>
   </div>
 </template>
 

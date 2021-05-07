@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="bg-dark min-height">
     <Navbar />
 
     <router-view />
@@ -15,6 +15,8 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+    .min-height{
+      min-height: 120vh;
+    }
 </style>

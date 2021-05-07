@@ -14,11 +14,11 @@
       <div class="p-2 d-flex justify-content-between align-items-center">
           <div>
                 <div class="total-price">
-                    Total price: <span> {{cartTotalCost}} SEK</span>
+                    Total price: {{cartTotalCost}} SEK
                 </div>
                 <small class="text-muted">inkl. moms</small>
           </div>
-          <button class="btn btn-primary">Go to payment</button>
+          <router-link to="/shoppinglist" type="button" class="btn btn-primary">Go to order</router-link>
       </div>
   </div>
 </template>

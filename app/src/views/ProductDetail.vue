@@ -1,6 +1,6 @@
 <template>
   <div>
-        <div v-if="product" class="container my-5 py-5">
+        <div v-if="product" class="container my-5 py-5 bg-light">
             <section class="text-center">
                 <h3 class="mb-5 font-weight-bold">Product Details</h3>
 
@@ -20,7 +20,7 @@
 
                         </div>
                         <div class="d-flex justify-content-between align-items-center">
-                            <h3> Pris: <span class="text-danger">{{product.price}}</span> SEK </h3>
+                            <h3> Pris: {{product.price}} SEK </h3>
                             <button @click="addProductToCart({product, quantity})" class="btn btn-primary">Add to cart</button>
                         </div>
                     </div>
@@ -41,7 +41,6 @@
 import { mapActions, mapGetters } from 'vuex'
 export default {
     name: 'ProductDetails',
-    props:['id'],
     data(){
         return{
             quantity: 1
