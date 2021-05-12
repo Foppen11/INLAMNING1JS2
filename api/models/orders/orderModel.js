@@ -2,31 +2,14 @@ const mongodb = require('mongoose');
 const Order = require('./orderSchema');
 
 exports.getOrders = (req, res) => {
-    Order.find({}, (err, data) => {
-      if(err) {
-        return res.status(500).json({
-          statusCode: 500,
-          status: false,
-          message: err.message || 'Something went wrong when fetching the orders'
-        })
-      }
-  
-      res.status(200).json(data);
-  
-    })
-  }
-exports.getUserOrders = (req, res) => {
-    Order.find({ email: req.params.email }, (err, data) => {
-      if(err) {
-        return res.status(500).json({
-          statusCode: 500,
-          status: false,
-          message: err.message || 'Something went wrong when fetching the orders'
-        })
-      }
-      res.status(200).json(data);
-    })
-  }
+    Order.find({email: req.params.email})
+      .then(data => res.status(200).json(data))
+      .catch(err => res.status(500).json({
+        statusCode: 500,
+        status: false,
+        message: err.message || 'Something went wrong with fetching the orders'
+      }))
+    }
 
   exports.createOrder = (req, res) => {
 

@@ -4,25 +4,22 @@ import router from '@/router'
 
 export default{
     state: {
-        orders: [],
-        order: null
+        orders: []
     },
     getters:{
         orders: state => state.orders,
-        order: state => state.order
     },
     mutations:{
+        SET_ORDER: (state, orders) => {
+            state.orders = orders
+        },
         PLACED_ORDER: () => {
             router.push('/thanks')
         }
     },
     actions:{
-        getOrders: async({commit}) => {
-            const res = await axios.get('http://localhost:9999/api/order')
-            commit('ORDERS', res.data)
-        },
-        getOneOrder: async({commit}, id) => {
-            const res = await axios.get('http://localhost:9999/api/order/' + id)
+        getOrders: async({commit}, email) => {
+            const res = await axios.get('http://localhost:9999/api/order/' + email)
             commit('SET_ORDER', res.data)
         },
         makeOrder: ({commit} , order) => {

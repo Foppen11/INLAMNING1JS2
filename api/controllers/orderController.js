@@ -3,7 +3,7 @@ const orderModel = require('../models/orders/orderModel');
 const auth = require('../authorization/auth');
 
 router.get('/', orderModel.getOrders);
-router.get('/:email', orderModel.getUserOrders);
+router.get('/:email', orderModel.getOrders);
 
 
 router.post('/new', orderModel.createOrder);

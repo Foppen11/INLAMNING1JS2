@@ -28,7 +28,7 @@
                         <router-link class="nav-link" aria-current="page" to="/products">Products</router-link>
                     </li>
                     <li class="nav-item">
-                        <router-link class="nav-link" aria-current="page" to="/orders">Orders</router-link>
+                        <router-link v-if="loggedIn" class="nav-link" aria-current="page" to="/orders">Orders</router-link>
                     </li>                    
                 </ul>
                 <!-- center links -->
