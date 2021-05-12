@@ -46,6 +46,9 @@ export default{
         DELETE_FROM_CART: (state, item) => {
             state.cart.splice((state.cart.find(i => i.product._id === item.product._id)), 1)
             return
+        },
+        CLEAN_CART: state => {
+            state.cart = []
         }
     },
     actions: {
@@ -57,6 +60,9 @@ export default{
         },
         deleteItem: ({commit}, product) => {
             commit('DELETE_FROM_CART', product)
+        },
+        cleanCartList: ({commit}) => {
+            commit('CLEAN_CART')
         }
     }
 }

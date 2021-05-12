@@ -9,8 +9,10 @@
                 <h5>Total price: {{cartTotalCost}} SEK</h5>
             </div>
             <div class="d-flex align-items-center justify-content-center">
-                <button class="btn btn-primary me-2">MAKE ORDER</button>
-                <button class="btn btn-danger">RESET SHOPPINGLIST</button>
+                <button v-if="loggedIn" class="btn btn-primary me-2" @click="order" >MAKE ORDER</button>
+                <button v-else-if="shoppingCart.length < 1" class="btn btn-primary me-2" disabled="true" >CART IS EMPTY</button>
+                <router-link type="button" to="/login" v-else class="btn btn-primary me-2">SIGN IN TO MAKE ORDER</router-link>
+                <button class="btn btn-danger" @click="cleanCartList">RESET SHOPPINGLIST</button>
             </div>
         </div>
     </div>
@@ -18,14 +20,25 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import ShoppingCartProduct from '../components/shoppingCart/ShoppingListDetails'
 export default {
     computed: {
-        ...mapGetters(['shoppingCart','cartItemQuantity', 'cartTotalCost'])
+        ...mapGetters(['activeUser','shoppingCart','cartItemQuantity', 'cartTotalCost', 'loggedIn'])
     },
     components:{
         ShoppingCartProduct
+    },
+    methods:{
+        ...mapActions(['cleanCartList', 'makeOrder']),
+        order() {
+            let order = {
+                email: this.activeUser,
+                list: this.shoppingCart,
+                price: this.cartTotalCost
+            }
+            this.makeOrder(order)
+        }
     }
 
 }

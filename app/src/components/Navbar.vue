@@ -50,7 +50,18 @@
                         </ul>
                     </li>
                     <li class="nav-item drop-down">
+                        <router-link
+                        v-if="!loggedIn"
+                        class="nav-link dropdown"
+                        to="/login"
+                        id="navbarDropdownMenuLink"
+                        aria-expanded="false"
+                        >
+                        <i class="fas fa-user"></i>
+                        </router-link>
+
                         <a
+                        v-else
                         class="nav-link dropdown"
                         href="#"
                         id="navbarDropdownMenuLink"
@@ -58,13 +69,13 @@
                         data-mdb-toggle="dropdown"
                         aria-expanded="false"
                         >
-                            <i class="fas fa-user"></i>
+                        <i class="fas fa-user"></i>
                         </a>
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-                            USER SETTINGS
+                        <ul class="dropdown-menu dropdown-menu-end shopping-cart" aria-labelledby="navbarDropdownMenuLink">
+                            <button class="btn btn-danger" @click="logout">Log out</button>
                         </ul>
-                </li>
-            </ul>
+                    </li>
+                </ul>
             </div>
         
         </div>
@@ -74,7 +85,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import ShoppingCart from './shoppingCart/ShoppingCart'
 export default {
     name: 'navbar',
@@ -82,7 +93,10 @@ export default {
         ShoppingCart
     },
     computed:{
-        ...mapGetters(['cartItemQuantity'])
+        ...mapGetters(['cartItemQuantity', 'loggedIn'])
+    },
+    methods:{
+        ...mapActions(['logout'])
     }
 }
 </script>
