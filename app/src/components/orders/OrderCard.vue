@@ -22,11 +22,6 @@ export default {
     props:['order'],
     components:{
         OrderListDetail
-    },
-    methods:{
-        index(){
-            
-        }
     }
 }
 </script>

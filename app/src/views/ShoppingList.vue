@@ -9,9 +9,9 @@
                 <h5>Total price: {{cartTotalCost}} SEK</h5>
             </div>
             <div class="d-flex align-items-center justify-content-center">
-                <button v-if="loggedIn" class="btn btn-primary me-2" @click="order" >MAKE ORDER</button>
-                <button v-else-if="shoppingCart.length < 1" class="btn btn-primary me-2" disabled="true" >CART IS EMPTY</button>
-                <router-link type="button" to="/login" v-else class="btn btn-primary me-2">SIGN IN TO MAKE ORDER</router-link>
+                <button v-if="shoppingCart.length < 1" class="btn btn-primary me-2" disabled="true" >CART IS EMPTY</button>
+                <router-link v-else-if="!loggedIn" type="button" to="/login" class="btn btn-primary me-2">SIGN IN TO MAKE ORDER</router-link>
+                <button v-else class="btn btn-primary me-2" @click="order" >MAKE ORDER</button>
                 <button class="btn btn-danger" @click="cleanCartList">RESET SHOPPINGLIST</button>
             </div>
         </div>
