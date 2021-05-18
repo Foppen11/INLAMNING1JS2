@@ -32,12 +32,14 @@ export default {
     methods:{
         ...mapActions(['cleanCartList', 'makeOrder']),
         order() {
+
             let order = {
                 email: this.activeUser,
                 list: this.shoppingCart,
                 price: this.cartTotalCost
             }
             this.makeOrder(order)
+            setTimeout(this.cleanCartList, 2000)
         }
     }
 
