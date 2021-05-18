@@ -29,17 +29,14 @@ export default {
       }
       dispatch('login', user)
     },
-    login: ({commit}, {user, route}) => {
+    login: ({commit}, user) => {
       axios.post('http://localhost:9999/api/users/login', user)
       .then(res => {
         if(res.status === 200) {
           commit('LOGIN_USER', user.email)
 
-          if(route) {
-            router.push(route)
-          } else {
-            router.push('/')
-          }
+          router.push('/')
+          
         }
       })
     },
